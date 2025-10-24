@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🚗 Pay & Park - Smart Booking</title>
   <style>
     body {
@@ -156,13 +158,13 @@
     .slot.booked {background-color: #ff5252; color: white;}
     .slot.booked:hover {background-color: #e53935;}
 
+    /* ===================== MODAL ===================== */
     .modal {
-      display: none;
+      display: none; /* ✅ FIXED: modal hidden by default */
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
       background: rgba(0,0,0,0.6);
-      display: flex;
       align-items: center;
       justify-content: center;
       z-index: 10;
@@ -196,6 +198,26 @@
       position: absolute;
       top: 10px; right: 10px;
       padding: 5px 10px;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* ===================== FOOTER ===================== */
+    footer {
+      text-align: center;
+      background: #eee;
+      padding: 10px;
+      color: #444;
+      font-size: 14px;
+    }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 600px) {
+      .login-card { width: 85%; padding: 25px; }
+      .parking-card img { height: 140px; }
+      .slots-grid { grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); }
     }
   </style>
 </head>
@@ -273,7 +295,7 @@
   <div id="slotsContainer" class="slots-grid"></div>
 </div>
 
-<!-- Booking Modal -->
+<!-- ===================== BOOKING MODAL ===================== -->
 <div id="bookingModal" class="modal">
   <div class="modal-content">
     <button class="close-btn" onclick="closeBookingForm()">X</button>
@@ -284,6 +306,11 @@
     <button onclick="confirmBooking()">Confirm Booking</button>
   </div>
 </div>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  © 2025 Pay & Park - Kolhapur | Smart Parking System
+</footer>
 
 <script>
   const users = {
@@ -388,13 +415,3 @@
       alert("Invalid Car Number! Use 2 letters followed by 6 digits. Example: MH123456");
       return;
     }
-    selectedSlot.booked = true;
-    selectedSlot.details = { name, time, carNo };
-    closeBookingForm();
-    renderSlots();
-    alert(Slot ${selectedSlot.number} booked successfully ✅);
-  }
-</script>
-
-</body>
-</html>
